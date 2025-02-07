@@ -18,7 +18,7 @@ def fact(n):
 print(fact(n))
 
 
-#program to reverse a string
+#program to reverse a string and check that string is palindrome or not
 myStr = str(input("Enter string: "))
 
 def reverse():
@@ -80,6 +80,24 @@ if is_prime_recursive(n):
     print(f"{n} is a prime number.")
 else:
     print(f"{n} is not a prime number.")
+
+#program to check that number is palindrome or not 
+def palindrome(n):
+    rev = ""
+    for i in n:
+        rev = i+rev
+    print(rev)
+
+    if rev ==n:
+        print(f"number {n} is a palindrome number.")
+    else:
+        print(f"number {n} is not a palindrome number.")
+
+palindrome((input("Enter the number: ")))
+
+
+
+    
 
     
 
