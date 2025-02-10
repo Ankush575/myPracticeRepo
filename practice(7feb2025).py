@@ -94,16 +94,3 @@ def palindrome(n):
         print(f"number {n} is not a palindrome number.")
 
 palindrome((input("Enter the number: ")))
-
-
-
-    
-
-    
-
-
-
-
-
-
-   
