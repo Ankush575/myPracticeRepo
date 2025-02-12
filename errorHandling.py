@@ -132,6 +132,7 @@ class userDetails:
         self.userEmail = userEmail
         self.userAddress = userAddress
         self.userMobileNumber = userMobileNumber
+        print(f"Username is : {self.userName}")
         pass
 
     def printUserEmail(self):
@@ -140,14 +141,89 @@ class userDetails:
         except AttributeError:
             print(f"{self.userName} does not have email.")
 
-    def printuserAdress(self):
-        try:
-            print(f"User address is : {self.userAddress}")
-        except AttributeError:
-            print(f"{self.userName} does not have address")
+    def printUserAddress(self):
+        if self.userAddress is None:
+            print(f"{self.userName} does not have any address.")
+        else:
+            try:
+                print(f"User address is : {self.userAddress}")
+            except AttributeError:
+                print(f"{self.userName} does not have address")
 
-    def AttributeError(self):
+    def printUserMobileNumber(self):
+        if self.userMobileNumber is None:
+            print(f"{self.userName} does not have mobile number")
+        else:
+            try:
+                print(f"User mobile number is : {self.userMobileNumber}")
+            except AttributeError:
+                print(f"{self.userName} does not have mobile number")
+
+
+user = userDetails(input("Enter the username:"), input("Enter the email:"))
+user.printUserEmail()
+user.printUserAddress()
+user.printUserMobileNumber()
+
+
+'''python program to raise an exception'''
+
+
+class shopping:
+    def __init__(self, item, price, balance):
+        self.item = item
+        self.price = price
+        self.balance = balance
+        if balance < price:
+            raise Exception("Insufficient balance")
+        else:
+            print("Item purchased successfully")
+
+
+try:
+    obj = shopping(input("Enter the item you want to purchase:"), int(
+        input("Enter the price of the item you want to purchase:")), int(input("Enter your balance amount:")))
+except Exception as e:
+    print(f"Error: {e}")
+
+
+'''python program for custom exception'''
+
+
+class insufficientBalance(Exception):
+    def __init__(self, message="Insufficient balance"):
+        self.message = message
+        super().__init__(self.message)
+
+
+class bankAccount:
+    def __init__(self, accountHolderName, balance=0):
+        self.accountHolderName = accountHolderName
+        self.balance = balance
+
+    def deposit(self, amount):
+        self.balance += amount
+        print(
+            f"{amount} deposited successfully. Current balance is: {self.balance}")
+
+    def withdraw(self, amount):
         try:
-            print(f"User address is : {self.AttributeError}")
-        except AttributeError:
-            print(f"{self.userName} attribute is not present in class")
+            if amount > self.balance:
+                raise insufficientBalance(
+                    f"{self.accountHolderName} has insufficient balance to withdraw {amount}.")
+            else:
+                self.balance -= amount
+                print(
+                    f"{amount} withdrawn successfully. Current balance is: {self.balance}")
+        except insufficientBalance as e:
+            print(f"Error: {e}")
+
+
+try:
+    account = bankAccount(input("Enter the account holder name:"))
+    account.deposit(int(input("Enter the amount you want to deposit:")))
+    account.withdraw(int(input("Enter the amount you want to withdraw:")))
+except Exception as e:
+    print(f"Error: {e}")
+finally:
+    print("Code executed successfully.")
